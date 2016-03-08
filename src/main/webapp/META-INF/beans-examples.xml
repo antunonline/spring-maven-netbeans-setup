@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <!--  JMX Bean example -->
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="beans">
+            <map>
+                <!-- testBean1 = bean name visible in JMX console -->
+                <entry key="bean:name=testBean1" value-ref="testBean"/>
+            </map>
+        </property>
+    </bean>
     
+    <bean id="testBean" class="hr.com.unix.java.springcore.examples.jmx.JmxTestBean">
+        <property name="name" value="TestBean"/>
+    </bean>
 
 </beans>

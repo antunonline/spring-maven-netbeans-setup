@@ -1,0 +1,6 @@
+
+h3. Building spring application
+
+<pre>
+mvn package
+</pre>

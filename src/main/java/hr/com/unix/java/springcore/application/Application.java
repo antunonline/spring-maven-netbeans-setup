@@ -22,7 +22,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  *
  * @author Antun
  */
-@ComponentScan(basePackages = {"hr.com.unix.java.springcore.application.*"})
+@ComponentScan(basePackages = {
+    "hr.com.unix.java.springcore.application.*",
+    "hr.com.unix.java.springcore.examples.*"
+})
 @Configuration
 @SpringBootApplication
 @EnableWebMvc

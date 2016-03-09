@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("password")
                 .roles("USER");
     }
-    
+
     public void configureWithJdbcAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         DataSource dataSource = null;
         // org.postgresql.ds.PGSimpleDataSource
@@ -37,11 +37,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // org.mariadb.jdbc.MariaDbDataSource 
         // javax.sql.XADataSource
         auth
-		.jdbcAuthentication()
-			.dataSource(dataSource)
-			.withDefaultSchema()
-			.withUser("user").password("password").roles("USER").and()
-			.withUser("admin").password("password").roles("USER", "ADMIN");
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .withDefaultSchema()
+                .withUser("user").password("password").roles("USER").and()
+                .withUser("admin").password("password").roles("USER", "ADMIN");
+    }
+
+    public void configureWithLdapAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .ldapAuthentication()
+                .userDnPatterns("uid={0},ou=people")
+                .groupSearchBase("ou=groups");
+
     }
 
     @Override
@@ -70,5 +78,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.html")
                 .permitAll();
     }
-    
+
 }
